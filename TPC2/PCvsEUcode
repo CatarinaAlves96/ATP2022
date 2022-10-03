@@ -1,0 +1,18 @@
+import random
+N = int(input("Introduza um número"))
+a = random.randrange(1,101)
+count = 0
+if N != a:
+    while N != a: 
+        if N > a:
+            print(a, "O número que pensei é maior.")
+            a = random.randrange(a, 101)
+        elif N < a:
+            print(a, "O número que pensei é menor.")
+            a = random.randrange(1,a)
+        count = count + 1
+else:
+    print (a, "Acertou!")
+count = count + 1
+print(N)
+print(count)
