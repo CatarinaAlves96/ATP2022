@@ -9,9 +9,9 @@ while n != 0:
 (4) Média
 (5) Maior
 (6) Menor
-(7) estaOrdenada por ordem crescente)
-(8) estaOrdenada por ordem decrescente)
-(9) Procura um elemento)
+(7) estaOrdenada por ordem crescente
+(8) estaOrdenada por ordem decrescente
+(9) Procura um elemento
 (0) Sair""")
         if n == 1:
             for num in range(1,101):
