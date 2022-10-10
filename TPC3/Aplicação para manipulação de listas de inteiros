@@ -17,7 +17,6 @@ while n != 0:
             res = []
             for num in range(1,101):
                 res.append(random.randrange(1,101))
-            n = int(input("Escolha uma opção:"))
         elif n == 2:
             res = []
             count = 0
@@ -26,34 +25,29 @@ while n != 0:
                 num = int(input("Introduza o elemento:"))
                 res.append(num)
                 count = count + 1
-            n = int(input("Escolha uma opção:"))
         elif n == 3:
             soma = 0
             for num in res:
                 soma = soma + num
             print(soma)
-            n = int(input("Escolha uma opção:"))
         elif n == 4:
             soma = 0
             for num in res:
                 soma = soma + num
                 media = soma // len(res)
             print(media)
-            n = int(input("Escolha uma opção:"))
         elif n == 5:
             maior = res[0]
             for num in res[1:]:
                 if num > maior:
                     maior = num
             print(maior)
-            n = int(input("Escolha uma opção:"))
         elif n == 6:
             menor = res[0]
             for num in res[1:]:
                 if num < menor:
                     menor = num
             print(menor)
-            n = int(input("Escolha uma opção:"))
         elif n == 7:
             cres = "Sim"
             copylista = res.copy()
@@ -61,7 +55,6 @@ while n != 0:
             if res != copylista:
                 cres = "Não"
             print(cres)
-            n = int(input("Escolha uma opção:"))
         elif n == 8:
             decres = "Sim"
             copylista = res.copy()
@@ -69,7 +62,6 @@ while n != 0:
             if res != copylista:
                 decres = "Não"
             print(decres)
-            n = int(input("Escolha uma opção:"))
         elif n == 9:
             elem = int(input("Elemento:"))
             if elem in res:
@@ -77,6 +69,6 @@ while n != 0:
             else:
                 indx = -1
             print(indx)
-            n = int(input("Escolha uma opção:"))
+        n = int(input("Escolha uma opção:"))
 if n == 0:
     print(res)
