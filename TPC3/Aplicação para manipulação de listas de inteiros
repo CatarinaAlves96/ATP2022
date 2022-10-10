@@ -1,6 +1,7 @@
 res = []
 import random
 n = int(input("Escolha uma opção:"))
+
 while n != 0:
         print("""(1) Criar Lista
 (2) Ler Lista
@@ -22,6 +23,7 @@ while n != 0:
             while count < N:
                 num = int(input("Introduza o elemento:"))
                 res.append(num)
+                count = count + 1
             n = int(input("Escolha uma opção:"))
         elif n == 3:
             soma = 0
