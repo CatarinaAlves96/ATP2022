@@ -73,6 +73,8 @@ while n != 0:
             elem = int(input("Elemento:"))
             if elem in res:
                 indx = res.index(elem)
+            else:
+                indx = -1
             print(indx)
             n = int(input("Escolha uma opção:"))
 if n == 0:
