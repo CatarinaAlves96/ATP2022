@@ -18,6 +18,7 @@ while n != 0:
                 res.append(random.randrange(1,101))
             n = int(input("Escolha uma opção:"))
         elif n == 2:
+            res = []
             count = 0
             N = int(input("Introduza o número de elementos:"))
             while count < N:
