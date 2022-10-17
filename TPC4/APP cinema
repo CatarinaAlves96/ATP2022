@@ -1,0 +1,72 @@
+def listar(cinema):
+    for sala in cinema:
+        nlugares, ocupados, filme = sala
+        print(nlugares, ocupados, filme) 
+
+def inserirSala(cinema, sala):
+            filme = input("Introduza o nome do filme:")
+            nlugares = int(input("Introduza o número de lugares da sala:"))
+            ocupados = []
+            if sala not in cinema:
+                cinema.append((nlugares, ocupados, filme))
+            return cinema
+
+def bilheteDisponivel(cinema, filme, lugar):
+    for sala in cinema:
+        nlugares, ocupados, filme = sala
+        if lugar in ocupados:
+            return False
+        return True
+
+def vendeBilhete(cinema, filme, lugar):
+    for sala in cinema:
+        nlugares, ocupados, filme = sala
+        ocupados.append(lugar)
+        return cinema
+
+def listarDisponibilidades(cinema):
+    for sala in cinema:
+        nlugares, ocupados, filme = sala
+        if nlugares > len(ocupados):
+            print(filme, nlugares-len(ocupados))
+
+def devolveBilhete (cinema, filme, lugar):
+    for sala in cinema:
+        nlugares, ocupados, filme = sala
+        ocupados.remove(lugar)
+        return cinema
+
+def menu():
+    print("""    (1) Reset
+    (2) Inserir Sala
+    (3) Listar Cinema
+    (4) Verifica se bilhete disponível
+    (5) Vende bilhete
+    (6) Verifica lugares disponíveis
+    (7) Devolve bilhete
+    (0) Sair""")
+
+# APP
+
+cinema = []
+opcao = '1'
+while opcao != '0':
+    menu()
+    opcao = input("Introduza uma opção:")
+    if opcao == '2':
+        cinema = inserirSala(cinema, input("Introduza o nome da sala:"))
+        print(cinema)
+    elif opcao == '3':
+        listar (cinema)
+    elif opcao == '4':
+        bilheteDisponivel(cinema, input("Nome do filme:"), int(input("Escolha o lugar:")))
+    elif opcao == '5':    
+        vendeBilhete(cinema, input("Nome do filme:"), int(input("Escolha o lugar:")))
+    elif opcao == '6':
+        listardisponibilidades(cinema)
+    elif opcao == '7':
+        devolveBilhete(cinema, input("Nome do filme:"), int(input("Escolha o lugar:")))
+    elif opcao == '1':
+        cinema = []
+if opcao == '0':
+    print(cinema)
