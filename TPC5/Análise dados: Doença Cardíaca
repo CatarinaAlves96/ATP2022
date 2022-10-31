@@ -1,0 +1,125 @@
+import csv
+
+def lerficheiro(mh):
+    heart = open(mh, encoding="utf-8")
+    csv_reader = csv.DictReader(heart, delimiter=",")
+    myheart = []
+    for row in csv_reader:
+        myheart.append(row)
+    return myheart
+
+myheart = lerficheiro("myheart.csv")
+
+def doençaporsexo(mh):
+    res = {}
+    for dictionary in mh:
+        if dictionary["temDoença"] == "1":
+            if dictionary["sexo"] in res.keys():
+                res[dictionary["sexo"]] = res[dictionary["sexo"]] + 1
+            else:
+                res[dictionary["sexo"]] = 1
+    return res
+
+print(doençaporsexo(myheart))
+
+def intidade(mh):
+    for dicionario in myheart:
+        dicionario["idade"]= int(dicionario["idade"])
+    return int(dicionario["idade"])
+
+intidade(myheart)
+
+def listaidadeorg (mh):
+    res = []
+    for dicionario in myheart:
+        if dicionario["temDoença"] == "1":
+            if dicionario["idade"] not in res:
+                res.append(dicionario["idade"])
+    res.sort()
+    return res
+
+print(listaidadeorg(myheart))
+
+def idadeporescet(mh):
+    res = {}
+    for dicionario in myheart:
+        if dicionario["temDoença"] == "1":
+            if dicionario["idade"] in res:
+                res[dicionario["idade"]] = res[dicionario["idade"]] + 1
+            else:
+                res[dicionario["idade"]] = 1
+    res["30-34"] = res[31] + res[32] + res[33] + res[34]
+    del res[31], res[32], res[33], res[34]
+    res["35-39"] = res[35] + res[36] + res[37] + res[38] + res[39]
+    del res[35], res[36], res[37], res[38], res[39]
+    res["40-44"] = res[40] + res[41] + res[42] + res[43] + res[44]
+    del res[40], res[41], res[42], res[43], res[44]
+    res["45-49"] = res[45] + res[46] + res[47] + res[48] + res[49]
+    del res[45], res[46], res[47], res[48], res[49]
+    res["50-54"] = res[50] + res[51] + res[52] + res[53] + res[54]
+    del res[50], res[51], res[52], res[53], res[54]
+    res["55-59"] = res[55] + res[56] + res[57] + res[58] + res[59]
+    del res[55], res[56], res[57], res[58], res[59]
+    res["60-64"] = res[60] + res[61] + res[62] + res[63] + res[64]
+    del res[60], res[61], res[62], res[63], res[64]
+    res["65-69"] = res[65] + res[66] + res[67] + res[68] + res[69]
+    del res[65], res[66], res[67], res[68], res[69]
+    res["70-74"] = res[70] + res[71] + res[72] + res[73] + res[74]
+    del res[70], res[71], res[72], res[73], res[74]
+    res["75-79"] = res[75] + res[76] + res[77]
+    del res[75], res[76], res[77]
+    return res
+
+print(idadeporescet(myheart))
+
+def pprint(function):
+    for key, value in function.items():
+        print(f'{key: <10}{value: <15}')
+
+pprint(idadeporescet(myheart))
+pprint(doençaporsexo(myheart))
+
+
+def intcolesterol(mh):
+    for dicionario in myheart:
+        dicionario["colesterol"]= int(dicionario["colesterol"])
+    return int(dicionario["colesterol"])
+
+intcolesterol(myheart)
+
+def listacolesterolorg (mh):
+    res = []
+    for dicionario in myheart:
+        if dicionario["temDoença"] == "1":
+            if dicionario["colesterol"] not in res:
+                res.append(dicionario["colesterol"])
+    res.sort()
+    return res
+
+print(listacolesterolorg(myheart))
+
+def doençapornivelcol(mh):
+    res = {}
+    for dicionario in myheart:
+        if dicionario["temDoença"] == "1":
+            if dicionario["colesterol"] in res:
+                res[dicionario["colesterol"]] = res[dicionario["colesterol"]] + 1
+            else:
+                res[dicionario["colesterol"]] = 1
+    res["0-99"] = res[0]
+    del res[0]
+    res["100-199"] = res[100] + res[110] + res[113] + res[117] + res[123] + res[126] + res[139] + res[142] + res[149] + res[152] + res[153] + res[156] + res[160] + res[164] + res[166] + res[167] + res[170] + res[171] + res[172] + res[173] + res[174] + res[175] + res[177] + res[180] + res[182] + res[184] + res[186] + res[188] + res[190] + res[192] + res[193] + res[195] + res[196] + res[197] + res[198]
+    del res[100], res[110], res[113], res[117], res[123], res[126], res[139], res[142], res[149], res[152], res[153], res[156], res[160], res[164], res[166], res[167], res[170], res[171], res[172], res[173], res[174], res[175], res[177], res[180], res[182], res[184], res[186], res[188], res[190], res[192], res[193], res[195], res[196], res[197], res[198]
+    res["200-299"] = res[200] + res[201] + res[202] + res[203] + res[204] + res[205] + res[206] + res[207] + res[208] + res[210] + res[211] + res[212] + res[213] + res[214] + res[216] + res[217] + res[218] + res[219] + res[220] + res[221] + res[222] + res[223] + res[224] + res[225] + res[226] + res[228] + res[229] + res[230] + res[231] + res[232] + res[233] + res[234] + res[235] + res[236] + res[237] + res[239] + res[241] + res[242] + res[243] + res[244] + res[245] + res[246] + res[247] + res[248] + res[249] + res[252] + res[254] + res[255] + res[256] + res[257] + res[258] + res[259] + res[260] + res[261] + res[263] + res[264] + res[265] + res[266] + res[267] + res[268] + res[269] + res[270] + res[272] + res[273] + res[274] + res[275] + res[276] + res[277] + res[279] + res[280] + res[281] + res[282] + res[283] + res[284] + res[285] + res[286] + res[287] + res[288] + res[289] + res[290] + res[291] + res[292] + res[293] + res[294] + res[295] + res[297] + res[298] + res[299]
+    del res[200], res[201], res[202], res[203], res[204], res[205], res[206], res[207], res[208], res[210], res[211], res[212], res[213], res[214], res[216], res[217], res[218], res[219], res[220], res[221], res[222], res[223], res[224], res[225], res[226], res[228], res[229], res[230], res[231], res[232], res[233], res[234], res[235], res[236], res[237], res[239], res[241], res[242], res[243], res[244], res[245], res[246], res[247], res[248], res[249], res[252], res[254], res[255], res[256], res[257], res[258], res[259], res[260], res[261], res[263], res[264], res[265], res[266], res[267], res[268], res[269], res[270], res[272], res[273], res[274], res[275], res[276], res[277], res[279], res[280], res[281], res[282], res[283], res[284], res[285], res[286], res[287], res[288], res[289], res[290], res[291], res[292], res[293], res[294], res[295], res[297], res[298], res[299]
+    res["300-399"] = res[300] + res[303] + res[304] + res[305] + res[306] + res[308] + res[309] + res[310] + res[311] + res[312] + res[315] + res[316] + res[319] + res[322] + res[326] + res[327] + res[329] + res[330] + res[331] + res[333] + res[336] + res[337] + res[338] + res[339] + res[341] + res[342] + res[349] + res[355] + res[369] + res[384] + res[388] + res[392] + res[393]
+    del res[300], res[303], res[304], res[305], res[306], res[308], res[309], res[310], res[311], res[312], res[315], res[316], res[319], res[322], res[326], res[327], res[329], res[330], res[331], res[333], res[336], res[337], res[338], res[339], res[341], res[342], res[349], res[355], res[369], res[384], res[388], res[392], res[393]
+    res ["400-499"] = res[404] + res[407] + res[409] + res[466] + res[491]
+    del res[404], res[407], res[409], res[466], res[491]
+    res["500-599"] = res[518] + res[529]
+    del res[518], res[529]
+    res["600-699"] = res[603]
+    del res[603]
+    return res
+print(doençapornivelcol(myheart))
+pprint(doençapornivelcol(myheart))
