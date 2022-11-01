@@ -1,0 +1,97 @@
+# obras.py
+#Modelo:
+#obras = [(nome, descr,anoCriacao,periodo,compositor,duracao, _id)]
+#Read dataset para lista tuplos
+import csv
+def readDataset(fnome):
+    f = open(fnome, encoding="utf-8")
+    f.readline()
+    csv_reader = csv.reader(f,delimiter=";")
+    obras = []
+    for row in csv_reader:
+        obras.append(tuple(row))
+    return obras
+
+def numeroobras(fnome):
+    res = len(fnome)
+    return res
+
+def pp(obra):
+    print(f"{obra[0] [:25]:25} | {obra[1][:50]:50} | {obra[4][:20]:20} | {obra[2][:6]:6}")
+
+
+def ordtitulo(t):
+    return t[0]
+
+def tituloAno(obras):
+    res = []
+    for nome, _, ano, *_ in obras:
+        res.append((nome, ano))
+    res.sort(key=ordtitulo)
+    return res
+
+def ordtitulo1(t):
+    return t[1]
+
+def anoTitulo(obras):
+    res = []
+    for nome, _, ano, *_ in obras:
+        res.append((nome, ano))
+    res.sort(key=ordtitulo1)
+    return res
+
+def tituloporano(obras):
+    res = {}
+    for nome, _, ano, *_ in obras:
+        if ano in res.keys():
+            res[ano].append(nome)
+        else:
+            res[ano] = [nome]
+    return res
+
+def compositores(obras):
+    res = []
+    for _, _, _, _, compositor, *_ in obras:
+        res.append(compositor)
+    res.sort()
+    return res
+
+def obrasporperiodo(obras):
+    res = {}
+    for _, _, _, periodo, *_ in obras:
+        if periodo in res.keys():
+            res[periodo] = res[periodo] + 1
+        else:
+            res[periodo] = 1
+    return res
+
+def obrasporano(obras):
+    res = {}
+    for _, _, anoCriacao, *_ in obras:
+        if anoCriacao in res.keys():
+            res[anoCriacao] = res[anoCriacao] + 1
+        else:
+            res[anoCriacao] = 1
+    return res
+
+def obrasporcomp(obras):
+    res = {}
+    for _, _, _, _, compositor, *_ in obras:
+        if compositor in res.keys():
+            res[compositor] = res[compositor] + 1
+        else:
+            res[compositor] = 1
+    return res
+
+import matplotlib.pyplot as plt
+
+def plotdistrib(distribuição):
+    eixox = [x for x in range(1, len(distribuição)+1)]
+    label = list(distribuição.keys())
+    eixoy = []
+    for y in distribuição:
+        eixoy.append(distribuição[y])
+    plt.bar(eixox, eixoy, width = 0.4, color = ['pink'])
+    plt.xticks(eixox, label, rotation='vertical', fontsize = 6)
+    plt.title('Distribuição')
+    plt.show()
