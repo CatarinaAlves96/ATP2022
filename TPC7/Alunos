@@ -1,0 +1,168 @@
+import csv
+
+
+def lerData(fnome):
+    al = open(fnome, encoding = "utf-8")
+    csv_reader = csv.DictReader(al, delimiter=",")
+    alunos = []
+    for row in csv_reader:
+        alunos.append(row)
+    al.close()
+    return alunos
+
+alunos = lerData("alunos.csv")
+
+def alunosporcurso(fnome):
+    res = {}
+    for dicionario in fnome:
+        if dicionario["curso"] in res.keys():
+            res[dicionario["curso"]] = res[dicionario["curso"]] + 1
+        else:
+            res[dicionario["curso"]] = 1
+    return res
+
+print(alunosporcurso(alunos))
+
+def mediaal(fnome):
+    mediadict = {}
+    for dicionario in fnome:
+        media = (int(dicionario["tpc1"]) + int(dicionario["tpc2"]) + int(dicionario["tpc3"]) + int(dicionario["tpc4"]))/4
+        if dicionario["nome"] not in mediadict.keys():
+            mediadict[dicionario["nome"]] = media
+    return mediadict
+
+mediaD = mediaal(alunos)
+print(mediaD)
+
+def mediaL(fnome):
+    medialist = ["Media"]
+    for dicionario in fnome:
+        media = (int(dicionario["tpc1"]) + int(dicionario["tpc2"]) + int(dicionario["tpc3"]) + int(dicionario["tpc4"]))/4
+        medialist.append(media)
+    return medialist
+
+media = mediaL(alunos)
+print(media)
+print(len(media))
+
+def newcolumn(inputfile, outputfile,lista):
+    read = open(inputfile, "r", encoding="utf-8")
+    write = open(outputfile, "w", newline = '', encoding="utf-8")
+    csvreader = csv.reader(read)
+    csvwriter = csv.writer(write)
+    i = 0
+    for row in csvreader:
+        row.append(lista[i])
+        csvwriter.writerow(row)
+        i = i + 1
+newcolumn("alunos.csv", "alunos5.csv", media)
+
+def lerData2(fnome):
+    al = open(fnome, encoding = "utf-8")
+    csv_reader = csv.DictReader(al, delimiter=",")
+    alunos = []
+    for row in csv_reader:
+        alunos.append(row)
+    al.close()
+    return alunos
+
+alunos2 = lerData2("alunos5.csv")
+
+def listamedia(fnome):
+    res = []
+    for dicionario in fnome:
+        res.append(float(dicionario["Media"]))
+    return res
+
+listesc = (listamedia(alunos2))
+print(listesc)
+print(len(listesc))
+
+
+def escalões2(fnome):
+    res = {}
+    escalão = "EDCBA"
+    temp = 1
+    n = 0
+    for i in range(4, 21, 4):
+        esc = escalão[n]
+        res[esc] = 0
+        n = n + 1
+        for dicionario in fnome:
+                if round(float(dicionario["Media"]), 0) >= temp and round(float(dicionario["Media"]),0) <= i:
+                    res[esc] = res [esc] + 1
+        temp = i + 1
+    return res
+
+distresc2 = escalões2(alunos2)
+print(distresc2)
+
+def listesc(fnome):
+    res = ["Escalões"]
+    escalão = "EDCBA"
+    temp = 1
+    n = 0
+    for i in range(4, 21, 4):
+        esc = escalão[n]
+        n = n + 1
+        for dicionario in fnome:
+            if round(float(dicionario["Media"]), 0) >= temp and round(float(dicionario["Media"]), 0) <= i:
+                res.append(esc)
+        temp = i + 1
+    return res
+print(listesc(alunos2))
+print(len(listesc(alunos2)))
+
+
+def escalões(fnome):
+    res = {}
+    escalão = "EDCBA"
+    temp = 1
+    n = 0
+    for i in range(4, 21, 4):
+        esc = escalão[n]
+        n = n + 1
+        for dicionario in fnome:
+                if float(dicionario["Media"]) >= temp and float(dicionario["Media"]) <= i:
+                    res[dicionario["Media"]] = esc
+        temp = i + 1
+    return res
+
+distresc = escalões(alunos2)
+print(distresc)
+
+def distrmedia(fnome):
+    res = {}
+    for dicionario in fnome:
+        if dicionario["Media"] in res.keys():
+            res[dicionario["Media"]] = res[dicionario["Media"]] + 1
+        else:
+            res[dicionario["Media"]] = 1
+    return res
+
+print(distrmedia(alunos2))
+dismed = distrmedia(alunos2)
+
+newcolumn("alunos5.csv", "alunos1.csv", listesc(alunos2))
+
+def pprint(function):
+    for key, value in function.items():
+        print(f'{key: <10}{value: <15}')
+
+pprint(dismed)
+pprint(distresc2)
+
+import matplotlib.pyplot as plt
+
+def plotdistrib(distribuição):
+    eixox = [x for x in range(1, len(distribuição)+1)]
+    label = list(distribuição.keys())
+    eixoy = []
+    for y in distribuição:
+        eixoy.append(distribuição[y])
+    plt.bar(eixox, eixoy, width = 0.4, color = ['gold'])
+    plt.xticks(eixox, label, rotation='horizontal', fontsize = 6)
+    plt.title('Distribuição')
+    plt.show()
+
+plotdistrib(distresc2)
